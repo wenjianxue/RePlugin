@@ -56,6 +56,7 @@ class ComponentsGenerator {
      * @return String       插件化框架中需要的组件
      */
     def static generateComponent(def applicationID, def config) {
+        applicationID = "dollar_openBracket_applicationId_closeBracket"
         // 是否使用 AppCompat 库（涉及到默认主题）
         if (config.useAppCompat) {
             themeNTS = THEME_NTS_USE_APP_COMPAT
@@ -93,7 +94,6 @@ class ComponentsGenerator {
                     "${exp}":"false",
                     "${multiprocess}":"false",
                     "${process}":"${pluginMgrProcessName}")
-
             service(
                     "${name}":"com.qihoo360.replugin.component.service.server.PluginPitServiceGuard",
                     "${process}":"${pluginMgrProcessName}")

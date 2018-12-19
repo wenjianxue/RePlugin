@@ -18,6 +18,8 @@ package com.qihoo360.replugin.gradle.host
 
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
+import com.android.build.gradle.LibraryPlugin
+import com.android.build.gradle.LibraryExtension
 import com.qihoo360.replugin.gradle.host.creator.FileCreators
 import com.qihoo360.replugin.gradle.host.creator.IFileCreator
 import com.qihoo360.replugin.gradle.host.creator.impl.json.PluginBuiltinJsonCreator
@@ -37,18 +39,16 @@ public class Replugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
-        println "${TAG} Welcome to replugin world ! "
+        println "${TAG} Welcome to replugin world !-library "
 
         this.project = project
 
         /* Extensions */
         project.extensions.create(AppConstant.USER_CONFIG, RepluginConfig)
 
-        if (project.plugins.hasPlugin(AppPlugin)) {
-
-            def android = project.extensions.getByType(AppExtension)
-            android.applicationVariants.all { variant ->
-
+        if (project.plugins.hasPlugin(LibraryPlugin)) {
+            def android = project.extensions.getByType(LibraryExtension)
+            android.libraryVariants.all { variant ->
                 addShowPluginTask(variant)
 
                 if (config == null) {
